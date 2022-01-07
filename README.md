@@ -1,4 +1,5 @@
-# monoman
+[<img src="markdown/logo.png">](markdown/logo.png)
+------
 
 Monoman is a puzzle-platformer that I created out of sheer boredom while in school. It's
 meant to be a remake of an old game I made, except with assets I made myself and code
