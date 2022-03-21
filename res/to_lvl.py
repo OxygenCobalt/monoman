@@ -1,6 +1,6 @@
-# This script transforms traditional .tmx files into the custom .clv format,
+# This script transforms traditional .tmx files into the custom .lvl format,
 # which is both smaller and more efficent than .tmx.
-# For more info on .clv, see the clv.md document in this directory.
+# For more info on .lvl, see the lvl.md document in this directory.
 
 from xml.etree import ElementTree
 import os
@@ -131,7 +131,7 @@ class Empty():
     def render(self):
         return self.amount - 1
 
-def create_clv(idx):
+def create_lvl(idx):
     # --- STAGE 1: TRANSLATION ---
 
     # Parse the tiled document and extract the properties we want from it.
@@ -276,20 +276,20 @@ def create_clv(idx):
     # This is the most straightfoward process
 
     # Add our identifier and title first.
-    clv = bytearray(b"lvl")
+    lvl = bytearray(b"lvl")
 
     for ch in props["title"]:
-        clv.append(ord(ch))
+        lvl.append(ord(ch))
 
-    clv.append(0)
+    lvl.append(0)
 
     # Then append our tiles. These were already ordered in Stage 2.
     for tile in map_data:
-        clv.append(tile.render())
+        lvl.append(tile.render())
 
-    # Open up our output .clv file and write out our data.
+    # Open up our output .lvl file and write out our data.
     with open("./lvl/" + str(idx) + ".lvl", "wb") as file:
-        file.write(clv)
+        file.write(lvl)
 
 if __name__ == "__main__":
     # Assume that each .tmx is named N.tmx, where N is the level number.
@@ -298,4 +298,4 @@ if __name__ == "__main__":
     for level in levels:
         idx = int(level.split(".")[0][4:])
         print(f"processing level {idx}")
-        create_clv(idx)
+        create_lvl(idx)

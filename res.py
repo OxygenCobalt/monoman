@@ -6,7 +6,7 @@ import os
 def media_path(filename):
     return path(os.path.join("res", "media", filename))
 
-def clv_path(idx):
+def lvl_path(idx):
     return path(os.path.join("res", "lvl", str(idx) + ".lvl"))
 
 def path(relative_path):

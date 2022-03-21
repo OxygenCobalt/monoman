@@ -74,11 +74,11 @@ def gen(idx):
     global player
 
     # Assume that the level name will be (idx).lvl
-    path = res.clv_path(idx)
+    path = res.lvl_path(idx)
 
-    with open(path, "rb") as clv:
+    with open(path, "rb") as lvl:
         # Ensure the identifier is present.
-        if clv.read(3) != b"lvl":
+        if lvl.read(3) != b"lvl":
             raise ValueError(f"{path} is not a .lvl file")
 
         title = ""
@@ -87,8 +87,7 @@ def gen(idx):
 
         # Read the title first. This is the only header information.
         while True:
-            byte = clv.read(1)
-
+            byte = lvl.read(1)
             if byte == b'\0':
                 break
 
@@ -104,7 +103,7 @@ def gen(idx):
             x = 0
             y = 0
 
-            for byte in iter(lambda: clv.read(1), b''):
+            for byte in iter(lambda: lvl.read(1), b''):
                 tile = int.from_bytes(byte, "big")
 
                 # If this tile isn't empty space...
